@@ -9,14 +9,17 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.bairestest.fragments.ButtonsFragment
+import com.example.bairestest.fragments.GoogleFragment
+import com.example.bairestest.fragments.ReposFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private val googleFragment = GoogleFragment.newInstance()
-    private val buttonsFragment = ButtonsFragment.newInstance()
-    private val reposFragment = ReposFragment.newInstance()
+    private val googleFragment by lazy { GoogleFragment.newInstance() }
+    private val buttonsFragment by lazy { ButtonsFragment.newInstance() }
+    private val reposFragment by lazy { ReposFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        supportFragmentManager.replace(R.id.container, googleFragment, "google")
     }
 
     override fun onBackPressed() {
@@ -54,9 +62,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_google -> supportFragmentManager.replace(R.id.container, googleFragment)
-            R.id.nav_buttons-> supportFragmentManager.replace(R.id.container, buttonsFragment)
-            R.id.nav_repos -> supportFragmentManager.replace(R.id.container, reposFragment)
+            R.id.nav_google -> supportFragmentManager.replace(R.id.container, googleFragment, "google")
+            R.id.nav_buttons-> supportFragmentManager.replace(R.id.container, buttonsFragment, "buttons")
+            R.id.nav_repos -> supportFragmentManager.replace(R.id.container, reposFragment, "repos")
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
@@ -65,4 +73,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
-fun FragmentManager.replace(container: Int, fragment: Fragment, tag: String? = fragment.tag) { this.beginTransaction().replace(container, fragment).commitAllowingStateLoss() }
+fun FragmentManager.replace(container: Int, fragment: Fragment, tag: String) { beginTransaction().replace(container, fragment, tag).commitAllowingStateLoss() }

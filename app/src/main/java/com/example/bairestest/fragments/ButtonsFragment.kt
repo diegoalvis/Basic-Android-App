@@ -2,7 +2,7 @@ package com.example.bairestest.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.example.bairestest.R
 import kotlinx.android.synthetic.main.fragment_buttons.*
 
 
-class ButtonsFragment : Fragment() {
+class ButtonsFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_buttons, container, false)
     }

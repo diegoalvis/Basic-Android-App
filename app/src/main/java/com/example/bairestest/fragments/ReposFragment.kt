@@ -24,7 +24,7 @@ class ReposFragment : androidx.fragment.app.Fragment() {
     private val adapter = RepoAdapter(this::onRepoClick)
 
     private fun onRepoClick(pos: Int) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(adapter.data[pos].url)))
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(adapter.data[pos].html_url)))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,14 +44,17 @@ class ReposFragment : androidx.fragment.app.Fragment() {
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(activity!!)
 
+        progress.visibility = View.VISIBLE
         apiInterface
             .searchRepos()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                progress.visibility = View.GONE
                 adapter.data = it.items.subList(0, 10)
                 adapter.notifyDataSetChanged()
             }, {
+                progress.visibility = View.GONE
                 it.printStackTrace()
             })
 

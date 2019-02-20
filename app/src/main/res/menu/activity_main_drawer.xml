@@ -6,16 +6,16 @@
     <item android:title="Test App"/>
 
         <item
-                android:id="@+id/nav_google"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="Google"/>
+                android:id="@+id/nav_repos"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Repos"/>
         <item
                 android:id="@+id/nav_buttons"
                 android:icon="@drawable/ic_menu_gallery"
                 android:title="Buttons"/>
         <item
-                android:id="@+id/nav_repos"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Repos"/>
+                android:id="@+id/nav_google"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="Google"/>
 
 </menu>

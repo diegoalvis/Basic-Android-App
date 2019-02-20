@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onResume() {
         super.onResume()
-        supportFragmentManager.replace(R.id.container, googleFragment, "google")
+        supportFragmentManager.replace(R.id.container, reposFragment, "repos")
     }
 
     override fun onBackPressed() {
